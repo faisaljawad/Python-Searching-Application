@@ -1,19 +1,22 @@
 import pandas as pd
 from tabulate import tabulate
 
+
 def search_data(name):
     # appending '.json' to fetch the file by the name it is receiving from the parent function
     df = pd.read_json(name + ".json")
     # converting dataframe values to string because we need to normalize the datatypes of all the values to perform generic searching
     df = df.applymap(str)
     column = input("Enter the search field name: ")
-    if column in df: 
+    if column in df:
         data = input("Enter the value you want to search in the field: ")
         # print(df.loc[df[column] == data] + '\n')
         result_df = df.loc[df[column] == data]
-        print(tabulate(result_df, headers='keys', tablefmt='psql', showindex=False))
+        print(tabulate(result_df, headers='keys',
+              tablefmt='psql', showindex=False))
     else:
         print("Column '{0}' not found in data".format(column))
+
 
 def print_columns(df, name):
     print("*****************************************************")
