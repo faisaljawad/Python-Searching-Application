@@ -15,7 +15,7 @@ This command-line application consists of 3 json files which are read and then t
 - Change directory to the clone project folder
 - Install the package
   > pip install pandas
-- Run command line interface using the main.py file
+- Run command line interface using the **main.py** file
     ```
     python3 main.py 
     ```
