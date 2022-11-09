@@ -1,5 +1,5 @@
 import pandas as pd
-
+from tabulate import tabulate
 
 def search_data(name):
     # appending '.json' to fetch the file by the name it is receiving from the parent function
@@ -7,9 +7,13 @@ def search_data(name):
     # converting dataframe values to string because we need to normalize the datatypes of all the values to perform generic searching
     df = df.applymap(str)
     column = input("Enter the search field name: ")
-    data = input("Enter the value you want to search in the field: ")
-    print(df.loc[df[column] == data] + '\n')
-
+    if column in df: 
+        data = input("Enter the value you want to search in the field: ")
+        # print(df.loc[df[column] == data] + '\n')
+        result_df = df.loc[df[column] == data]
+        print(tabulate(result_df, headers='keys', tablefmt='psql', showindex=False))
+    else:
+        print("Column '{0}' not found in data".format(column))
 
 def print_columns(df, name):
     print("*****************************************************")
@@ -29,6 +33,7 @@ def view_search_fields():
 
 
 def print_main_menu():
+    print("\n*****************************************************")
     print("Welcome to my Searching System")
     print("Press 1: Search")
     print("Press 2: View a List of Searchable Fields")
@@ -38,16 +43,18 @@ def print_main_menu():
         print("Exiting...")
         exit()
     else:
-        if int(selection) == 1:
+        selection = int(selection)
+        if selection == 1:
             print("Select:\n 1) Users \n 2) Organizations \n 3) Tickets\n")
             selection_step_2 = input("Enter your selection: ")
-            if (int(selection_step_2) == 1):
+            selection_step_2 = int(selection_step_2)
+            if (selection_step_2 == 1):
                 search_data('users')
-            elif (int(selection_step_2) == 2):
+            elif (selection_step_2 == 2):
                 search_data('organizations')
-            elif (int(selection_step_2) == 3):
+            elif (selection_step_2 == 3):
                 search_data('tickets')
-        elif int(selection) == 2:
+        elif selection == 2:
             view_search_fields()
         else:
             print("You have entered invalid selection.\n")
