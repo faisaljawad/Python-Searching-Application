@@ -61,19 +61,22 @@ def print_main_menu():
         print("Exiting...")
         exit()
     else:
-        selection = int(selection)
-        if selection == 1:
-            print("Select:\n 1) Users \n 2) Organizations \n 3) Tickets\n")
-            selection_step_2 = input("Enter your selection: ")
-            selection_step_2 = int(selection_step_2)
-            if (selection_step_2 == 1):
-                search_data('users')
-            elif (selection_step_2 == 2):
-                search_data('organizations')
-            elif (selection_step_2 == 3):
-                search_data('tickets')
-        elif selection == 2:
-            view_search_fields()
+        if selection.isnumeric():
+            selection = int(selection)
+            if selection == 1:
+                print("Select:\n 1) Users \n 2) Organizations \n 3) Tickets\n")
+                selection_step_2 = input("Enter your selection: ")
+                selection_step_2 = int(selection_step_2)
+                if (selection_step_2 == 1):
+                    search_data('users')
+                elif (selection_step_2 == 2):
+                    search_data('organizations')
+                elif (selection_step_2 == 3):
+                    search_data('tickets')
+            elif selection == 2:
+                view_search_fields()
+            else:
+                print("You have entered invalid selection.\n")
         else:
             print("You have entered invalid selection.\n")
 
