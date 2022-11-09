@@ -1,6 +1,13 @@
 import pandas as pd
 
+"""
+This function (search_data) will take the 'name' of file/entity as input and read its corresponding .json file.
+The .json file is read into a Dataframe and then all its column values are converted to string in order to normalize the data into 
+generic datatype. If we do not convert this, we will have to make separate matching condition for numbers and strings.
+We also validate if the selected column and its value exists in the dataframe then we proceed with our further processing.
 
+Note: The code is tested with negative cases like when the values are incorrectly entered
+"""
 def search_data(name):
     # appending '.json' to fetch the file by the name it is receiving from the parent function
     df = pd.read_json(name + ".json")
@@ -18,7 +25,9 @@ def search_data(name):
     else:
         print("Column '{0}' not found in data".format(column))
 
-
+"""
+This function (print_columns) will print the columns of provided dataframe
+"""
 def print_columns(df, name):
     print("*****************************************************")
     print("Search '{0}' with:".format(name))
@@ -26,7 +35,9 @@ def print_columns(df, name):
         print(column)
     print("*****************************************************\n")
 
-
+"""
+This function (view_search_fields) will return the list of all possible columns that a user can search for in each dataframe
+"""
 def view_search_fields():
     users_df = pd.read_json('users.json')
     organizations_df = pd.read_json('organizations.json')
@@ -35,7 +46,10 @@ def view_search_fields():
     print_columns(organizations_df, 'Organizations')
     print_columns(tickets_df, 'Tickets')
 
-
+"""
+This function (print_main_menu) will print the main menu of the program that will drive the whole command line application
+It can be exited anytime by selecting the 'Q' option
+"""
 def print_main_menu():
     print("\n*****************************************************")
     print("Welcome to my Searching System")
@@ -63,7 +77,9 @@ def print_main_menu():
         else:
             print("You have entered invalid selection.\n")
 
-
+"""
+This function (main) will keep running infinitely until the user selects to quit the application from command line
+"""
 def main():
     while (True):
         print_main_menu()
