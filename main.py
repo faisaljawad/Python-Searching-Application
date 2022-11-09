@@ -1,5 +1,4 @@
 import pandas as pd
-from tabulate import tabulate
 
 
 def search_data(name):
@@ -10,10 +9,12 @@ def search_data(name):
     column = input("Enter the search field name: ")
     if column in df:
         data = input("Enter the value you want to search in the field: ")
-        # print(df.loc[df[column] == data] + '\n')
         result_df = df.loc[df[column] == data]
-        print(tabulate(result_df, headers='keys',
-              tablefmt='psql', showindex=False))
+        if not result_df.empty:
+            for column in result_df:
+                print("{0:20} {1}".format(column, result_df[column].values[0]))
+        else:
+            print("\nSearching {0} for {1} with a value of {2} \nNo result found".format(name, column, data))
     else:
         print("Column '{0}' not found in data".format(column))
 
